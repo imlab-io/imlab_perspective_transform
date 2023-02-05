@@ -1,43 +1,59 @@
 ---
 layout: post
-title: Perspektif D�n�s�m�
+title: Perspektif Dönüşümü
 slug: perspective-transform
 author: Bahri ABACI
 categories:
 - Lineer Cebir
-- N�merik Y�ntemler
+- Nümerik Yöntemler
 thumbnail: /assets/post_resources/perspective_transform/thumbnail.png
 ---
 
-Perspektif nesnenin bulundugu konuma bagli olarak, g�zlemcinin g�z�nde biraktigi etkiyi (g�r�nt�y�) 2 boyutlu bir d�zlemde canlandirmak i�in gelistirilmis bir iz d�s�m teknigidir. R�nesans d�neminde�Masaccio' nun resimlerinde kullanmaya basladigi teknik g�n�m�zde ger�ek�i �izimler olusturmak i�in olmazsa olmazlardandir. Ancak olayi g�r�nt� isleme a�isindan ele aldigimizda **perspektif** genellikle islerimizi zorlastiran bir etkiye sahiptir. Ama� nesne tanima veya siniflandirma oldugunda nesnenin hangi a�idan g�r�nt�lendiginin bir �nemi olmamalidir.  
+Perspektif nesnenin bulunduğu konuma bağlı olarak, gözlemcinin gözünde bıraktığı etkiyi (görüntüyü) 2 boyutlu bir düzlemde canlandırmak için geliştirilmiş bir iz düşüm tekniğidir. Rönesans döneminde Masaccio' nun resimlerinde kullanmaya başladığı teknik günümüzde gerçekçi çizimler oluşturmak için olmazsa olmazlardandır. Ancak olayı görüntü işleme açısından ele aldığımızda **perspektif** genellikle işlerimizi zorlaştıran bir etkiye sahiptir. Amaç nesne tanıma veya sınıflandırma olduğunda nesnenin hangi açıdan görüntülendiğinin bir önemi olmamalıdır.  
 
 <!--more-->
   
-�rnegin standart bir karakter tanima uygulamasina g�r�nt� olarak verilen "*cescript*, "_cescript_" veya ?di??s?? g�r�nt�leri ayni kelime olmalarina ragmen bilgisayar tarafindan her seferinde farkli olarak okunacaktir. Iste **perspektif** d�n�s�m� bu noktada devreye girerek verilen g�r�nt� �zerindeki �l�ekleme, yayma, d�nme ve kayma gibi etkileri kaldirabilmemizi saglar. 
+Örneğin standart bir karakter tanıma uygulamasına görüntü olarak verilen "*cescript*, "_cescript_" veya ʇdıɹɔsǝɔ görüntüleri aynı kelime olmalarına rağmen bilgisayar tarafından her seferinde farklı olarak okunacaktır. İşte **perspektif** dönüşümü bu noktada devreye girerek verilen görüntü üzerindeki ölçekleme, yayma, dönme ve kayma gibi etkileri kaldırabilmemizi sağlar. 
 
-Perspektif d�zeltmede ama� kisinin veya nesnenin konum degistirmesi sonucu olusacak etkiyi betimleyebilmektir. Bu islem sayesinde g�r�nt� olustuktan sonra dahi belirli kisitlar i�erisinde resme baktigimiz a�iyi degistirebiliriz. Algoritma karakter tanima uygulamalrinda (Cam Scanner gibi) �ekilmis bir g�r�nt�y� belirli kaliplar i�erisine oturmada, plaka tanima, y�z tanima gibi uygulamalarda normalizasyon sirasinda siklikla kullanilmaktadir.  
+Perspektif düzeltmede amaç kişinin veya nesnenin konum değiştirmesi sonucu oluşacak etkiyi betimleyebilmektir. Bu işlem sayesinde görüntü oluştuktan sonra dahi belirli kısıtlar içerisinde resme baktığımız açıyı değiştirebiliriz. Algoritma karakter tanıma uygulamalrında (Cam Scanner gibi) çekilmiş bir görüntüyü belirli kalıplar içerisine oturmada, plaka tanıma, yüz tanıma gibi uygulamalarda normalizasyon sırasında sıklıkla kullanılmaktadır.  
 
-Asagida verilen matriste <img src="assets/post_resources/math//332cc365a4987aacce0ead01b8bdcc0b.svg?invert_in_darkmode" align=middle width=9.39498779999999pt height=14.15524440000002pt/>,<img src="assets/post_resources/math//deceeaf6940a8c7a5a02373728002b0f.svg?invert_in_darkmode" align=middle width=8.649225749999989pt height=14.15524440000002pt/> herhangi bir koordinat degeri olmak �zere, <img src="assets/post_resources/math//aca94dc4280088e4b15ee4be41751fd0.svg?invert_in_darkmode" align=middle width=13.18495034999999pt height=24.7161288pt/> ve <img src="assets/post_resources/math//15f93b25ba881e5829e8fc647b680fb2.svg?invert_in_darkmode" align=middle width=12.43916849999999pt height=24.7161288pt/> bu iki degerin d�n�s�m sonrasi degerlerini g�stermektedir. Matris g�sterimindeki a degerlerinin her birinin �zel bir anlami vardir.�
+Aşağıda verilen matriste $x$,$y$ herhangi bir koordinat değeri olmak üzere, $x'$ ve $y'$ bu iki değerin dönüşüm sonrası değerlerini göstermektedir. Matris gösterimindeki a değerlerinin her birinin özel bir anlamı vardır. 
 
-<p align="center"><img src="assets/post_resources/math//116b0389e27dac5fc484a7354ab5c839.svg?invert_in_darkmode" align=middle width=203.7274866pt height=59.1786591pt/></p>
+$$
+\begin{bmatrix}
+x'z \\
+y'z \\
+z
+\end{bmatrix}  
+\begin{bmatrix}
+a_{11} & a_{12} & a_{13}\\  
+a_{21} & a_{22} & a_{23}\\  
+a_{31} & a_{32} & a_{33}\\  
+\end{bmatrix}  
+\begin{bmatrix}
+x\\
+y\\
+1\\
+\end{bmatrix}  
+$$
 
-Simdi basitlik olmasi i�in bazi <img src="assets/post_resources/math//44bc9d542a92714cac84e01cbbb7fd61.svg?invert_in_darkmode" align=middle width=8.68915409999999pt height=14.15524440000002pt/> degerlerini <img src="assets/post_resources/math//29632a9bf827ce0200454dd32fc3be82.svg?invert_in_darkmode" align=middle width=8.219209349999991pt height=21.18721440000001pt/> kabul ederek elde edecegimiz <img src="assets/post_resources/math//aca94dc4280088e4b15ee4be41751fd0.svg?invert_in_darkmode" align=middle width=13.18495034999999pt height=24.7161288pt/> ve <img src="assets/post_resources/math//15f93b25ba881e5829e8fc647b680fb2.svg?invert_in_darkmode" align=middle width=12.43916849999999pt height=24.7161288pt/> degerlerini yorumlamaya �alisalim. Anlasilmasi en kolay durum ile incelememize baslayabiliriz: <img src="assets/post_resources/math//877ec8605e9a149fbdbacdc3b261d611.svg?invert_in_darkmode" align=middle width=275.4219286499999pt height=21.18721440000001pt/> ve <img src="assets/post_resources/math//f7f346faafc0b450ee416bf944606c99.svg?invert_in_darkmode" align=middle width=141.82056899999998pt height=21.18721440000001pt/>. Bu durumda <img src="assets/post_resources/math//1827f0f9f6d999034c150ef680d47bda.svg?invert_in_darkmode" align=middle width=45.31948079999999pt height=24.7161288pt/> ve�<img src="assets/post_resources/math//3ed059a1da67c3d11a55c21ce4e73e0a.svg?invert_in_darkmode" align=middle width=43.82793689999998pt height=24.7161288pt/>�olacaktir. Yani yeni olusan g�r�nt�deki her bir nokta oldugu yerde kalacaktir. (Aynalama)
+Şimdi basitlik olması için bazı $a$ değerlerini $0$ kabul ederek elde edeceğimiz $x'$ ve $y'$ değerlerini yorumlamaya çalışalım. Anlaşılması en kolay durum ile incelememize başlayabiliriz: $a_{12}=a_{13}=a_{22}=a_{23}=a_{31}=a_{32} = 0$ ve $a_{11}=a_{22}=a_{33} = 1$. Bu durumda $x' = x$ ve $y'=y$ olacaktır. Yani yeni oluşan görüntüdeki her bir nokta olduğu yerde kalacaktır. (Aynalama)
 
-### �teleme
+### Öteleme
 
-Diger basit bir durum ise <img src="assets/post_resources/math//837fe56d8e6abdc9484475eac2b44b30.svg?invert_in_darkmode" align=middle width=186.3543561pt height=21.18721440000001pt/> ve <img src="assets/post_resources/math//f7f346faafc0b450ee416bf944606c99.svg?invert_in_darkmode" align=middle width=141.82056899999998pt height=21.18721440000001pt/> durumudur. Bu durumda yeni koordinat degerleri <img src="assets/post_resources/math//636a506e70fd2a3cd0324c972e312385.svg?invert_in_darkmode" align=middle width=85.71335685pt height=24.7161288pt/>, <img src="assets/post_resources/math//ee70a03ce2c3b49a55f025394ed2c96a.svg?invert_in_darkmode" align=middle width=87.20492054999998pt height=24.7161288pt/>�seklinde olacaktir. Yani yeni g�r�nt�deki herbir nokta�<img src="assets/post_resources/math//281037dda0073f9e3c169b6c53660212.svg?invert_in_darkmode" align=middle width=21.79424774999999pt height=14.15524440000002pt/>�kadar saga ve�<img src="assets/post_resources/math//01dde2af628b8534c6f880cfe04b740e.svg?invert_in_darkmode" align=middle width=21.79424774999999pt height=14.15524440000002pt/>�kadar asagiya kayacaktir.
+Diğer basit bir durum ise $a_{12}=a_{22}=a_{31}=a_{32} = 0$ ve $a_{11}=a_{22}=a_{33} = 1$ durumudur. Bu durumda yeni koordinat değerleri $y' = y + a_{23}$, $x' = x + a_{13}$ şeklinde olacaktır. Yani yeni görüntüdeki herbir nokta $a_{13}$ kadar sağa ve $a_{23}$ kadar aşağıya kayacaktır.
 
-### �l�ekleme
+### Ölçekleme
 
-�l�ekleme islemi i�in�<img src="assets/post_resources/math//877ec8605e9a149fbdbacdc3b261d611.svg?invert_in_darkmode" align=middle width=275.4219286499999pt height=21.18721440000001pt/> ve <img src="assets/post_resources/math//8be983d78dbd26828f448d4c5b8d88b0.svg?invert_in_darkmode" align=middle width=52.75297334999999pt height=21.18721440000001pt/>�se�ilerek su durum elde edilir: <img src="assets/post_resources/math//a3845b0912c8bdbfd7ca6384a5d70f07.svg?invert_in_darkmode" align=middle width=66.44409255pt height=24.7161288pt/>�, <img src="assets/post_resources/math//a623d8df97c4f071a4877e711cf9b970.svg?invert_in_darkmode" align=middle width=67.93563809999998pt height=24.7161288pt/>. Ifadenin daha anlasilir olmasi i�in �<img src="assets/post_resources/math//21de9ef1ca1aa691456f97af1e78aa35.svg?invert_in_darkmode" align=middle width=112.81187444999998pt height=21.18721440000001pt/>�se�elim, bu durumda yeni olusan resimde <img src="assets/post_resources/math//deceeaf6940a8c7a5a02373728002b0f.svg?invert_in_darkmode" align=middle width=8.649225749999989pt height=14.15524440000002pt/> degerleri degismezken, <img src="assets/post_resources/math//50ef356199ecf9cd0b56dc55b19928ac.svg?invert_in_darkmode" align=middle width=47.75103794999999pt height=21.18721440000001pt/> daki bir nokta <img src="assets/post_resources/math//0965b5f2cc5612aacb2f4815ba3d0641.svg?invert_in_darkmode" align=middle width=52.362911699999984pt height=24.7161288pt/> ye, <img src="assets/post_resources/math//5083878ed0e20f1f455265a986774344.svg?invert_in_darkmode" align=middle width=47.75103794999999pt height=21.18721440000001pt/> deki bir nokta <img src="assets/post_resources/math//f31018f6e4a982602fe024fc08657e03.svg?invert_in_darkmode" align=middle width=52.362911699999984pt height=24.7161288pt/> a ... seklinde her bir <img src="assets/post_resources/math//332cc365a4987aacce0ead01b8bdcc0b.svg?invert_in_darkmode" align=middle width=9.39498779999999pt height=14.15524440000002pt/> noktasi <img src="assets/post_resources/math//76c5792347bb90ef71cfbace628572cf.svg?invert_in_darkmode" align=middle width=8.219209349999991pt height=21.18721440000001pt/> katina gitmekte yani resim <img src="assets/post_resources/math//332cc365a4987aacce0ead01b8bdcc0b.svg?invert_in_darkmode" align=middle width=9.39498779999999pt height=14.15524440000002pt/> ekseninde iki kat �l�eklenmektedir.
+Ölçekleme işlemi için $a_{12}=a_{13}=a_{22}=a_{23}=a_{31}=a_{32} = 0$ ve ${a_{33}} = 1$ seçilerek şu durum elde edilir: $y' = a_{22} y$ , $x' = a_{11} x$. İfadenin daha anlaşılır olması için  $a_{22}=1,a_{11}=2$ seçelim, bu durumda yeni oluşan resimde $y$ değerleri değişmezken, $x=10$ daki bir nokta $x'=20$ ye, $x=20$ deki bir nokta $x'=40$ a ... şeklinde her bir $x$ noktası $2$ katına gitmekte yani resim $x$ ekseninde iki kat ölçeklenmektedir.
 
-### D�nd�rme
+### Döndürme
 
-D�nd�rme islemi <img src="assets/post_resources/math//0371512dc45143d9e1c404a9aac28c5d.svg?invert_in_darkmode" align=middle width=111.56036429999999pt height=14.15524440000002pt/> degerlerinin �zel sekilde se�ilmesi ile yapilir. Bu se�im d�nd�rme a�isi <img src="assets/post_resources/math//27e556cf3caa0673ac49a8f0de3c73ca.svg?invert_in_darkmode" align=middle width=8.17352744999999pt height=22.831056599999986pt/> ya bagli olarak su sekilde ifade edilir: <img src="assets/post_resources/math//5a523ed0c3d8e2c4b00176ae12f47df2.svg?invert_in_darkmode" align=middle width=87.50189909999999pt height=24.65753399999998pt/> , <img src="assets/post_resources/math//237860db13346345ca138e2429b175f9.svg?invert_in_darkmode" align=middle width=101.20052745pt height=24.65753399999998pt/> , <img src="assets/post_resources/math//9f810af2d4a309a5d1eb28febdb6bb04.svg?invert_in_darkmode" align=middle width=85.67543489999998pt height=24.65753399999998pt/> , <img src="assets/post_resources/math//c83b52cf6bfc1c913511251b353a937e.svg?invert_in_darkmode" align=middle width=87.50189909999999pt height=24.65753399999998pt/>. Inceleme yapabilmemiz i�in yine basit olarak <img src="assets/post_resources/math//27e556cf3caa0673ac49a8f0de3c73ca.svg?invert_in_darkmode" align=middle width=8.17352744999999pt height=22.831056599999986pt/> degerini <img src="assets/post_resources/math//1c6512d0c8f909ef59643cb9bd8021b0.svg?invert_in_darkmode" align=middle width=24.657628049999992pt height=21.18721440000001pt/>, <img src="assets/post_resources/math//741a37c7e2b478fa19d0be5c818d9e93.svg?invert_in_darkmode" align=middle width=142.519113pt height=21.18721440000001pt/> ve <img src="assets/post_resources/math//1b0c414c468e7279b488dfd65f7c7182.svg?invert_in_darkmode" align=middle width=52.75299644999999pt height=21.18721440000001pt/> se�elim. <img src="assets/post_resources/math//acf1b8bbd82c00c81f1359cf90d0fc36.svg?invert_in_darkmode" align=middle width=102.37448759999998pt height=24.65753399999998pt/> ve <img src="assets/post_resources/math//952f0b0644ff0f5a1911ba5470b97bd9.svg?invert_in_darkmode" align=middle width=87.76258919999998pt height=24.65753399999998pt/> oldugu g�z �n�nde bulundurularak d�n�s�m sonrasi degerlerimiz <img src="assets/post_resources/math//0a4d1394e21415da1bc92260cbff13be.svg?invert_in_darkmode" align=middle width=58.104914999999984pt height=24.7161288pt/>, <img src="assets/post_resources/math//c2439bda9ce0de50c3898d8420b14bb5.svg?invert_in_darkmode" align=middle width=56.61337109999999pt height=24.7161288pt/> seklinde olacaktir. Yani yeni g�r�nt�de <img src="assets/post_resources/math//deceeaf6940a8c7a5a02373728002b0f.svg?invert_in_darkmode" align=middle width=8.649225749999989pt height=14.15524440000002pt/> noktalari <img src="assets/post_resources/math//019f81ae3f4c433d4f5bbc5ff002d38e.svg?invert_in_darkmode" align=middle width=21.43465829999999pt height=19.1781018pt/>, <img src="assets/post_resources/math//332cc365a4987aacce0ead01b8bdcc0b.svg?invert_in_darkmode" align=middle width=9.39498779999999pt height=14.15524440000002pt/> noktasi <img src="assets/post_resources/math//4eb1b9787b23954d9a6d0a46d13c6971.svg?invert_in_darkmode" align=middle width=22.180421999999993pt height=19.1781018pt/> noktasina tasinacak ve g�r�nt� orijine g�re simetrisi alinmis yani <img src="assets/post_resources/math//1c6512d0c8f909ef59643cb9bd8021b0.svg?invert_in_darkmode" align=middle width=24.657628049999992pt height=21.18721440000001pt/> derece d�nd�r�lm�s olacaktir.
+Döndürme işlemi $a_{11},a_{12},a_{21},a_{22}$ değerlerinin özel şekilde seçilmesi ile yapılır. Bu seçim döndürme açısı $\theta$ ya bağlı olarak şu şekilde ifade edilir: $a_{11} = \cos(\theta)$ , $a_{12} =-\sin(\theta)$ , $a_{21} = \sin(\theta)$ , $a_{22} = \cos(\theta)$. İnceleme yapabilmemiz için yine basit olarak $\theta$ değerini $180$, $a_{13},a_{23},a_{31},a_{32} = 0$ ve $a_{33} = 1$ seçelim. $\cos(180)=-1$ ve $\sin(180) = 0$ olduğu göz önünde bulundurularak dönüşüm sonrası değerlerimiz $x' = -x$, $y' = -y$ şeklinde olacaktır. Yani yeni görüntüde $y$ noktaları $-y$, $x$ noktası $-x$ noktasına taşınacak ve görüntü orijine göre simetrisi alınmış yani $180$ derece döndürülmüş olacaktır.
 
-Daha karmasik durumlar i�in ilk olarak <img src="assets/post_resources/math//630884b7e089613e3e7476288a35a259.svg?invert_in_darkmode" align=middle width=51.71628659999998pt height=14.15524440000002pt/> degerlerinin sifirdan farkli oldugu durumlar incelenebilir. Bu durumda <img src="assets/post_resources/math//aca94dc4280088e4b15ee4be41751fd0.svg?invert_in_darkmode" align=middle width=13.18495034999999pt height=24.7161288pt/> degerinde <img src="assets/post_resources/math//deceeaf6940a8c7a5a02373728002b0f.svg?invert_in_darkmode" align=middle width=8.649225749999989pt height=14.15524440000002pt/>, <img src="assets/post_resources/math//15f93b25ba881e5829e8fc647b680fb2.svg?invert_in_darkmode" align=middle width=12.43916849999999pt height=24.7161288pt/> degerinde ise <img src="assets/post_resources/math//332cc365a4987aacce0ead01b8bdcc0b.svg?invert_in_darkmode" align=middle width=9.39498779999999pt height=14.15524440000002pt/> ekseninin etkisi g�r�necektir. Daha karmasik bir durum ise **perspektif d�zeltmenin** temeli olan <img src="assets/post_resources/math//1713634c9489d71cc69f9e9e20ddecf3.svg?invert_in_darkmode" align=middle width=51.71628659999998pt height=14.15524440000002pt/> degerlerini sifirdan farkli se�mektir. Bu durum g�r�nt�deki uzaklik etkisini <img src="assets/post_resources/math//aca94dc4280088e4b15ee4be41751fd0.svg?invert_in_darkmode" align=middle width=13.18495034999999pt height=24.7161288pt/> ve <img src="assets/post_resources/math//15f93b25ba881e5829e8fc647b680fb2.svg?invert_in_darkmode" align=middle width=12.43916849999999pt height=24.7161288pt/> degerlerine yayarak g�zde �� boyut etkisini yaratan b�k�m� d�zeltmeyi saglar.
+Daha karmaşık durumlar için ilk olarak $a_{13},a_{23}$ değerlerinin sıfırdan farklı olduğu durumlar incelenebilir. Bu durumda $x'$ değerinde $y$, $y'$ değerinde ise $x$ ekseninin etkisi görünecektir. Daha karmaşık bir durum ise **perspektif düzeltmenin** temeli olan $a_{31},a_{32}$ değerlerini sıfırdan farklı seçmektir. Bu durum görüntüdeki uzaklık etkisini $x'$ ve $y'$ değerlerine yayarak gözde üç boyut etkisini yaratan bükümü düzeltmeyi sağlar.
 
-Bu yazimda basit �rneklerle baslik halinde de verdigim �� d�n�s�m� (�teleme-�l�ekleme-D�nd�rme) �rneklerle incelemeye �alisacagim. D�n�s�m i�in yazilan kodu inceleyerek baslayalim.  
+Bu yazımda basit örneklerle başlık halinde de verdiğim üç dönüşümü (Öteleme-Ölçekleme-Döndürme) örneklerle incelemeye çalışacağım. Dönüşüm için yazılan kodu inceleyerek başlayalım.  
   
 ```c
 //a11 = T[0]; a12 = T[3]; a13 = T[6];
@@ -78,13 +94,29 @@ for(h=0; h < height(out); h++)
 }
 ```
 
-**Peki bu kadar mi?**
+**Peki bu kadar mı?**
 
-Degil tabi ki :) Su ana kadar okudugunuz yazi i�erisinde dikkatinizi bir noktanin �zellikle �ekmesini istemistim. �l�ekleme kisminda verdigim �rnekte katsayinin iki se�ilmesi durumunda resimdeki her bir noktanin iki katina gittigini s�ylemistim. Ayni �rnekte durumu yeni olusan resim a�isindan ele alirsak, <img src="assets/post_resources/math//a8cfa0bfd812d6072a0650f07da67403.svg?invert_in_darkmode" align=middle width=112.85341319999999pt height=21.18721440000001pt/> gibi noktalar hi�bir <img src="assets/post_resources/math//0acac2a2d5d05a8394e21a70a71041b4.svg?invert_in_darkmode" align=middle width=25.350096749999988pt height=14.15524440000002pt/> �ifti i�in bir degere sahip olamayacaktir. Bu y�zden olusan resimde siyah noktalar (bu �rnek i�in yatay �izgiler) olusacaktir. Bunu engellemek i�in s�yle bir y�ntem izleyebiliriz.�
+Değil tabi ki :) Şu ana kadar okuduğunuz yazı içerisinde dikkatinizi bir noktanın özellikle çekmesini istemiştim. Ölçekleme kısmında verdiğim örnekte katsayının iki seçilmesi durumunda resimdeki her bir noktanın iki katına gittiğini söylemiştim. Aynı örnekte durumu yeni oluşan resim açısından ele alırsak, $x=1,x=3,\cdots$ gibi noktalar hiçbir $x,y$ çifti için bir değere sahip olamayacaktır. Bu yüzden oluşan resimde siyah noktalar (bu örnek için yatay çizgiler) oluşacaktır. Bunu engellemek için şöyle bir yöntem izleyebiliriz. 
 
-<p align="center"><img src="assets/post_resources/math//da6647763ec18b2638106fc05da1b052.svg?invert_in_darkmode" align=middle width=220.717167pt height=59.1786591pt/></p>
+$$
+\begin{bmatrix}
+xz \\
+yz \\
+z
+\end{bmatrix}  
+\begin{bmatrix}
+ia_{11} & ia_{12} & ia_{13}\\  
+ia_{21} & ia_{22} & ia_{23}\\  
+ia_{31} & ia_{32} & ia_{33}\\  
+\end{bmatrix}  
+\begin{bmatrix}
+x'\\
+y'\\
+1\\
+\end{bmatrix}  
+$$
   
-Y�ntem ilk kisimda anlatilan y�ntem ile ayni g�r�nmesine karsilik, bu sefer �ikti g�r�nt�s� �zerindeki bir noktanin <img src="assets/post_resources/math//bf4645e786baf289adfe68fe608d3e69.svg?invert_in_darkmode" align=middle width=47.35926029999999pt height=24.7161288pt/> girdi g�r�nt�s� �zerinde nereden geldigini aradigimizdan <img src="assets/post_resources/math//7392a8cd69b275fa1798ef94c839d2e0.svg?invert_in_darkmode" align=middle width=38.135511149999985pt height=24.65753399999998pt/> �ikti g�r�nt�s� �zerinde hi� bir bos nokta kalmayacaktir. Kod �zerinde yapacagimiz en �nemli degisim a katsayilari yerine ia katsayilarini bulma kisminda olacaktir. Matrissel sekilde g�sterilen <img src="assets/post_resources/math//6e6ef46c567f70e3c5145d9b202f6f77.svg?invert_in_darkmode" align=middle width=14.352379799999989pt height=21.68300969999999pt/> katsayilari <img src="assets/post_resources/math//44bc9d542a92714cac84e01cbbb7fd61.svg?invert_in_darkmode" align=middle width=8.68915409999999pt height=14.15524440000002pt/> katsayilarindan olusan matrisin tersine ait elemanlardir. Matris tersi bulma islemini baska bir yazimda anlatmayi planladigimdan bu kismi ge�erek yeni y�nteme ait kodlari paylasiyorum.  
+Yöntem ilk kısımda anlatılan yöntem ile aynı görünmesine karşılık, bu sefer çıktı görüntüsü üzerindeki bir noktanın $(x',y')$ girdi görüntüsü üzerinde nereden geldiğini aradığımızdan $(x,y)$ çıktı görüntüsü üzerinde hiç bir boş nokta kalmayacaktır. Kod üzerinde yapacağımız en önemli değişim a katsayıları yerine ia katsayılarını bulma kısmında olacaktır. Matrissel şekilde gösterilen $ia$ katsayıları $a$ katsayılarından oluşan matrisin tersine ait elemanlardır. Matris tersi bulma işlemini başka bir yazımda anlatmayı planladığımdan bu kısmı geçerek yeni yönteme ait kodları paylaşıyorum.  
   
 ```c
 //ia11 = T[0]; a12 = T[3]; a13 = T[6];
@@ -127,46 +159,83 @@ for(h=0; h < height(out); h++)
 }
 ```
   
-Dikkat edilecek olursa kodlamadaki tek degisimin T matrisi yerine iT olmadigi g�r�l�r. Bahsettigim �zere bu degisim sonrasinda for d�ng�lerimizi �ikis g�r�nt�s� �zerindeki koordinatlarda d�nd�recegimizden `x` ve `y` (yani x' ve y') degerleri giris g�r�nt�s�nde yerine yazilacaktir. Artik basitten karmasiga dogru �rneklerimize ge�ebiliriz.
+Dikkat edilecek olursa kodlamadaki tek değişimin T matrisi yerine iT olmadığı görülür. Bahsettiğim üzere bu değişim sonrasında for döngülerimizi çıkış görüntüsü üzerindeki koordinatlarda döndüreceğimizden `x` ve `y` (yani x' ve y') değerleri giriş görüntüsünde yerine yazılacaktır. Artık basitten karmaşığa doğru örneklerimize geçebiliriz.
 
-|Orjinal Imge| 45� D�nd�rme | 90� D�nd�rme | 45� D�nd�rme ve Yariya �l�ekleme|
+|Orjinal İmge| 45° Döndürme | 90° Döndürme | 45° Döndürme ve Yarıya Ölçekleme|
 |:----------:|:-----------------:|:----------------------:|:-----------:|
-![affine d�n�s�m� �rnek][affine] | ![affine d�n�s�m� �rnek][affine1] | ![affine d�n�s�m� �rnek][affine2] | ![affine d�n�s�m� �rnek][affine3]
+![affine dönüşümü örnek][affine] | ![affine dönüşümü örnek][affine1] | ![affine dönüşümü örnek][affine2] | ![affine dönüşümü örnek][affine3]
 | `rot2tform(128, 128, 0, 1.0)` | `rot2tform(128, 128, 45, 1.0)` | `rot2tform(128, 128, 90, 1.0)` | `rot2tform(128, 128, 45, 0.5)` |
-| <p align="center"><img src="assets/post_resources/math//2a9b9a3e0bf8f86a368b63a6e6fe1f61.svg?invert_in_darkmode" align=middle width=151.61542275pt height=59.1786591pt/></p> | <p align="center"><img src="assets/post_resources/math//9b363e3f712e370e1fe32aff788f7663.svg?invert_in_darkmode" align=middle width=185.4054807pt height=59.1786591pt/></p> | <p align="center"><img src="assets/post_resources/math//2524147ff89f40dcb2c3f0ae5187f996.svg?invert_in_darkmode" align=middle width=180.83925584999997pt height=59.1786591pt/></p> | <p align="center"><img src="assets/post_resources/math//93ced4bcedd036bb3f583e00634daca6.svg?invert_in_darkmode" align=middle width=193.62468345pt height=59.1786591pt/></p> |
+| $$T= \begin{bmatrix} 1.0 & 0.0 & 0.0 \\ 0.0 & 1.0 & 0.0 \\ 0.0 & 0.0 & 1.0 \end{bmatrix}$$ | $$T= \begin{bmatrix} 0.7 & -0.7 & 128.0 \\ 0.7 & 0.7 & -53.0 \\ 0.0 & 0.0 & 1.0 \end{bmatrix}$$ | $$T= \begin{bmatrix} 0.0 & -1.0 & 256.0 \\ 1.0 & 0.0 & 0.0 \\ 0.0 & 0.0 & 1.0 \end{bmatrix}$$ | $$T= \begin{bmatrix} 1.4 & -1.4 & 128.0 \\ 1.4 & 1.4 & -234.0 \\ 0.0 & 0.0 & 1.0 \end{bmatrix}$$ |
 
-Yukarida farkli d�n�s�m parametreleri i�in elde edilen sonu�lar verilmistir. Sonu�lar �retilirken imlab k�t�phanesinde yer alan ve bir merkez noktasi etrafinda d�nme ve �l�ekleme yapabilmek i�in gereken d�n�s�m matrisini hesaplayan `rot2tform` fonksiyonu kullanilmistir. Bu fonksiyonun �rettigi d�n�s�m matrisleri de tabloda ilgili s�tunlarin altinda verilmistir. 
+Yukarıda farklı dönüşüm parametreleri için elde edilen sonuçlar verilmiştir. Sonuçlar üretilirken imlab kütüphanesinde yer alan ve bir merkez noktası etrafında dönme ve ölçekleme yapabilmek için gereken dönüşüm matrisini hesaplayan `rot2tform` fonksiyonu kullanılmıştır. Bu fonksiyonun ürettiği dönüşüm matrisleri de tabloda ilgili sütunların altında verilmiştir. 
 
-Son s�z olarak perspektif d�zeltmedeki katsayilarin otomatik bulunmasindan bahsedebiliriz. Bu yaziyi yazmamdaki esas neden **sudoku ��z�c�** i�in gerekli olan perspektif d�zeltmesinin nasil yapilacagini anlatmakti. [Bir �nceki yazimi]({% post_url 2013-12-02-sudoku-cozucu-uygulamasi %}) okuduysaniz, sudoku karesinin karsidan �ekilmedigi durumlarda ne olacagini merak etmis olabilirsiniz. B�yle bir durumla karsilasmamiz durumunda gerekli d�n�s�m katsayilarini otomatik olarak belirleyerek d�n�s�m yapmamiz gerekecektir.
+Son söz olarak perspektif düzeltmedeki katsayıların otomatik bulunmasından bahsedebiliriz. Bu yazıyı yazmamdaki esas neden **sudoku çözücü** için gerekli olan perspektif düzeltmesinin nasıl yapılacağını anlatmaktı. [Bir önceki yazımı]({% post_url 2013-12-02-sudoku-cozucu-uygulamasi %}) okuduysanız, sudoku karesinin karşıdan çekilmediği durumlarda ne olacağını merak etmiş olabilirsiniz. Böyle bir durumla karşılaşmamız durumunda gerekli dönüşüm katsayılarını otomatik olarak belirleyerek dönüşüm yapmamız gerekecektir.
 
-## Perspektif D�n�s�m Katsayilarinin Elde Edilmesi
+## Perspektif Dönüşüm Katsayılarının Elde Edilmesi
 
-Parametrelerin otomatik olarak �ikarilmasi i�in bir ka� matris b�lmesi islemi gerekmektedir. B�ylece girdi olarak verilen bir g�r�nt� otomatik olarak kolaylikla hizalanabilmektedir.
-Perspektif d�n�s�m�n�n bir matris �arpmasi ile yapildigini biliyoruz. D�n�s�m i�in kullandigimiz matrisi islemlerimiz i�in tekrar yazalim.
+Parametrelerin otomatik olarak çıkarılması için bir kaç matris bölmesi işlemi gerekmektedir. Böylece girdi olarak verilen bir görüntü otomatik olarak kolaylıkla hizalanabilmektedir.
+Perspektif dönüşümünün bir matris çarpması ile yapıldığını biliyoruz. Dönüşüm için kullandığımız matrisi işlemlerimiz için tekrar yazalım.
 
-<p align="center"><img src="assets/post_resources/math//116b0389e27dac5fc484a7354ab5c839.svg?invert_in_darkmode" align=middle width=203.7274866pt height=59.1786591pt/></p>
+$$
+\begin{bmatrix}
+x'z \\
+y'z \\
+z
+\end{bmatrix}  
+\begin{bmatrix}
+a_{11} & a_{12} & a_{13}\\  
+a_{21} & a_{22} & a_{23}\\  
+a_{31} & a_{32} & a_{33}\\  
+\end{bmatrix}  
+\begin{bmatrix}
+x\\
+y\\
+1\\
+\end{bmatrix}  
+$$
   
-Burada <img src="assets/post_resources/math//bf4645e786baf289adfe68fe608d3e69.svg?invert_in_darkmode" align=middle width=47.35926029999999pt height=24.7161288pt/> �iftlerinin <img src="assets/post_resources/math//7392a8cd69b275fa1798ef94c839d2e0.svg?invert_in_darkmode" align=middle width=38.135511149999985pt height=24.65753399999998pt/> �iftlerinin <img src="assets/post_resources/math//44bc9d542a92714cac84e01cbbb7fd61.svg?invert_in_darkmode" align=middle width=8.68915409999999pt height=14.15524440000002pt/> matrisi ile d�n�s�m sonrasi aldigi degerler oldugunu hatirlayalim. Amacimizin <img src="assets/post_resources/math//44bc9d542a92714cac84e01cbbb7fd61.svg?invert_in_darkmode" align=middle width=8.68915409999999pt height=14.15524440000002pt/> matrisini bulmak oldugunu tekrarlayarak islemlerimize baslayalim. Ilk olarak <img src="assets/post_resources/math//f93ce33e511096ed626b4719d50f17d2.svg?invert_in_darkmode" align=middle width=8.367621899999993pt height=14.15524440000002pt/> degerini <img src="assets/post_resources/math//d317dab3abbc6f671f1dcf553201e79f.svg?invert_in_darkmode" align=middle width=155.5383852pt height=19.1781018pt/> seklinde yazarak <img src="assets/post_resources/math//aca94dc4280088e4b15ee4be41751fd0.svg?invert_in_darkmode" align=middle width=13.18495034999999pt height=24.7161288pt/> ve <img src="assets/post_resources/math//15f93b25ba881e5829e8fc647b680fb2.svg?invert_in_darkmode" align=middle width=12.43916849999999pt height=24.7161288pt/> degerlerini a�ik sekilde yazmaya �alisalim.
+Burada $(x',y')$ çiftlerinin $(x,y)$ çiftlerinin $a$ matrisi ile dönüşüm sonrası aldığı değerler olduğunu hatırlayalım. Amacımızın $a$ matrisini bulmak olduğunu tekrarlayarak işlemlerimize başlayalım. İlk olarak $z$ değerini $z=a_{31}x+a_{32}y+a_{33}$ şeklinde yazarak $x'$ ve $y'$ değerlerini açık şekilde yazmaya çalışalım.
   
-<p align="center"><img src="assets/post_resources/math//9d20e6dd67c8a88cacd84a18fd4a4ec8.svg?invert_in_darkmode" align=middle width=336.47675655pt height=35.18196pt/></p>  
+$$x'=\frac{a_{11}x+a_{12}y+a_{13}}{a_{31}x+a_{32}y+a_{33}}; y'=\frac{a_{21}x+a_{22}y+a_{23}}{a_{31}x+a_{32}y+a_{33}}$$  
   
-Simdi i�ler dislar �arpimi yaparak ifadeleri d�zenleyelim ve kolaylik olmasi adina <img src="assets/post_resources/math//cc66eabb96b1e6f09498d2c025cb6695.svg?invert_in_darkmode" align=middle width=52.75299644999999pt height=21.18721440000001pt/> alalim.  
+Şimdi içler dışlar çarpımı yaparak ifadeleri düzenleyelim ve kolaylık olması adına $a_{33}=1$ alalım.  
   
-<p align="center"><img src="assets/post_resources/math//7c92b263b1d338aed5fce8595d30cd8a.svg?invert_in_darkmode" align=middle width=292.6502436pt height=16.3763325pt/></p>ve <p align="center"><img src="assets/post_resources/math//e0e071a36631e2ecb5e37a6d7b7892c1.svg?invert_in_darkmode" align=middle width=290.41289804999997pt height=16.3763325pt/></p>  
+$$a_{31}xx' + a_{32}yx' + x' = a_{11}x+a_{12}y+a_{13}$$ve $$a_{31}xy' + a_{32}yy' + y' = a_{21}x+a_{22}y+a_{23}$$  
   
-Elde edilen ifadeyi solda <img src="assets/post_resources/math//79f484e408f95e8839929c2fffd02c82.svg?invert_in_darkmode" align=middle width=33.75191489999999pt height=24.7161288pt/>; sagda ise <img src="assets/post_resources/math//4fc63d27626433f23e36eca761bac52b.svg?invert_in_darkmode" align=middle width=12.47911664999999pt height=24.7161288pt/> l� terimler olacak sekilde d�zenlersek;  
+Elde edilen ifadeyi solda $x',y'$; sağda ise $a'$ lü terimler olacak şekilde düzenlersek;  
   
-<p align="center"><img src="assets/post_resources/math//a4a3f574882037f412428ee7cc3dbc87.svg?invert_in_darkmode" align=middle width=292.65023864999995pt height=16.3763325pt/></p>ve <p align="center"><img src="assets/post_resources/math//b8dabdd68d6928576e932108df8434c2.svg?invert_in_darkmode" align=middle width=290.41289474999996pt height=16.3763325pt/></p> 
+$$x' = a_{11}x+a_{12}y+a_{13} - a_{31}xx' - a_{32}yx'$$ve $$y' = a_{21}x+a_{22}y+a_{23} - a_{31}xy' -a_{32}yy'$$ 
 
 elde edilir.  
   
-Bu denklemleri matris formunda yazacak olursak (<img src="assets/post_resources/math//cbd1c0e87d9e8e261f4d30611b8664cf.svg?invert_in_darkmode" align=middle width=76.32017744999999pt height=22.465723500000017pt/>);  
+Bu denklemleri matris formunda yazacak olursak ($B = A\times a$);  
   
-<p align="center"><img src="assets/post_resources/math//80807870c5879d6e8a1f8188711bd6b4.svg?invert_in_darkmode" align=middle width=361.69162754999996pt height=177.5360268pt/></p> 
+$$ 
+\begin{bmatrix} 
+x'\\
+y'  
+\end{bmatrix}=  
+\begin{bmatrix}
+x & y & 1 & 0 & 0 & 0 & -xx' & -yx'\\  
+&&&&&&&\\  
+0 & 0 & 0 & x & y & 1 & -xy' & -yy'  
+\end{bmatrix}  
+\begin{bmatrix}
+a_{11}\\  
+a_{12}\\  
+a_{13}\\  
+a_{21}\\  
+a_{22}\\  
+a_{23}\\  
+a_{31}\\  
+a_{32}\\  
+a_{33}\\  
+\end{bmatrix}   
+$$ 
 
-ifadesi elde edilir. Burada aranilan <img src="assets/post_resources/math//44bc9d542a92714cac84e01cbbb7fd61.svg?invert_in_darkmode" align=middle width=8.68915409999999pt height=14.15524440000002pt/> vekt�r� <img src="assets/post_resources/math//1f3fcdc4a9ba8727f5488470e53257f1.svg?invert_in_darkmode" align=middle width=141.50867445pt height=26.76175259999998pt/> matris b�lme islemi ile kolaylikla bulunabilir. Burada dikkat edilmesi gereken bir nokta elimizde sekiz bilinmeyen (<img src="assets/post_resources/math//44bc9d542a92714cac84e01cbbb7fd61.svg?invert_in_darkmode" align=middle width=8.68915409999999pt height=14.15524440000002pt/> vekt�r�n�n elemanlari) olamasina ragmen g�r�n�rde sadece iki denklemimiz olmasidir. Sekiz bilinmeyenli bir denklemin tek ��z�m�n�n olmasi i�in bagimsiz sekiz denklem gerektiginden bizimde �alismada tek bir <img src="assets/post_resources/math//7392a8cd69b275fa1798ef94c839d2e0.svg?invert_in_darkmode" align=middle width=38.135511149999985pt height=24.65753399999998pt/> noktasi yerine d�rt tane <img src="assets/post_resources/math//7392a8cd69b275fa1798ef94c839d2e0.svg?invert_in_darkmode" align=middle width=38.135511149999985pt height=24.65753399999998pt/> noktasi �zerinden d�n�s�m yapilarak <img src="assets/post_resources/math//44bc9d542a92714cac84e01cbbb7fd61.svg?invert_in_darkmode" align=middle width=8.68915409999999pt height=14.15524440000002pt/> matrisi bulunmustur.
+ifadesi elde edilir. Burada aranılan $a$ vektörü $a = (A^{-1})B = B/A$ matris bölme işlemi ile kolaylıkla bulunabilir. Burada dikkat edilmesi gereken bir nokta elimizde sekiz bilinmeyen ($a$ vektörünün elemanları) olamasına rağmen görünürde sadece iki denklemimiz olmasıdır. Sekiz bilinmeyenli bir denklemin tek çözümünün olması için bağımsız sekiz denklem gerektiğinden bizimde çalışmada tek bir $(x,y)$ noktası yerine dört tane $(x,y)$ noktası üzerinden dönüşüm yapılarak $a$ matrisi bulunmuştur.
 
-Simdi gelelim kodlama kismina. Bir �nceki yazida matris tersini bulma kismindan bahsettigim i�in yapmamiz gerek tek islem `A` ve `B` matrislerini hazirlamak.
+Şimdi gelelim kodlama kısmına. Bir önceki yazıda matris tersini bulma kısmından bahsettiğim için yapmamız gerek tek işlem `A` ve `B` matrislerini hazırlamak.
 
 ```c
 float dst_data[] = 
@@ -190,16 +259,16 @@ matrix_t *inA = matrix_create(float, 8, 8, 1, dst_data);
 matrix_t *inB = matrix_create(float, 8, 1, 1, b_data);
 ```
 
-Matrislerimizi olusturduktan sonra katsayilari bulmak i�in �nceki yazimizda kullandigimiz�`matris_divide` fonksiyonunu kullanacagiz, ardindan olusan <img src="assets/post_resources/math//005c128d6e551735fa5d938e44e7a613.svg?invert_in_darkmode" align=middle width=8.219209349999991pt height=21.18721440000001pt/> satirlik vekt�r� kullanarak <img src="assets/post_resources/math//46e42d6ebfb1f8b50fe3a47153d01cd2.svg?invert_in_darkmode" align=middle width=36.52961069999999pt height=21.18721440000001pt/> l�k a matrisimizi yeniden olusturacagiz.
+Matrislerimizi oluşturduktan sonra katsayıları bulmak için önceki yazımızda kullandığımız `matris_divide` fonksiyonunu kullanacağız, ardından oluşan $8$ satırlık vektörü kullanarak $3\times 3$ lük a matrisimizi yeniden oluşturacağız.
 
 ```c
 matrix_t *inv = matrix_create(float);
 matrix_divide(inA, inB, inv);
 ```
 
-Bu asamada istedigimiz noktalari istedigimiz yeni noktalara d�n�st�recek d�n�s�m�matrisini�elde etmis�bulunuyoruz. Elde edilen bu sonu� imlab k�t�phanesinde yer alan `pts2tform` fonksiyonu ile de ger�eklenebilir.
+Bu aşamada istediğimiz noktaları istediğimiz yeni noktalara dönüştürecek dönüşüm matrisini elde etmiş bulunuyoruz. Elde edilen bu sonuç imlab kütüphanesinde yer alan `pts2tform` fonksiyonu ile de gerçeklenebilir.
 
-Bulunan degerler kullanilarak istenilen d�n�s�m�`imrotate` fonksiyonunu ile ger�eklestirilebilir. Her zamanki gibi bir �rnek uygulama ile yazimizi bitirelim. Birka� yazi �nce temelini attigimiz sudoku ��z�c� uygulamamiz i�in bulunan sudoku karesini hizalamaya �alisalim.
+Bulunan değerler kullanılarak istenilen dönüşüm `imrotate` fonksiyonunu ile gerçekleştirilebilir. Her zamanki gibi bir örnek uygulama ile yazımızı bitirelim. Birkaç yazı önce temelini attığımız sudoku çözücü uygulamamız için bulunan sudoku karesini hizalamaya çalışalım.
 
 ```c
 // read the test image
@@ -225,21 +294,21 @@ imtransform(test, transform, test_aligned);
 imwrite(test_aligned, "../data/test_aligned.bmp");
 ```
   
-Yazilan kod okunan sudoku resminin d�rt k�sesini girdi olarak aldiktan sonra sudoku karesini <img src="assets/post_resources/math//232b7825ad6b94218473890f57549b15.svg?invert_in_darkmode" align=middle width=69.40644809999999pt height=21.18721440000001pt/> lik bir karenin i�erisine hizalayacak d�n�s�m matrisini bulur ve d�n�s�m� ger�eklestirir. Kodumuzun girdi ve �iktilari su sekilde olacaktir.
+Yazılan kod okunan sudoku resminin dört köşesini girdi olarak aldıktan sonra sudoku karesini $512 \times 512$ lik bir karenin içerisine hizalayacak dönüşüm matrisini bulur ve dönüşümü gerçekleştirir. Kodumuzun girdi ve çıktıları şu şekilde olacaktır.
 
-|Girdi Imgesi|Hizalama I�in Se�ilen Noktalar|Hizalanmis Imge|
+|Girdi İmgesi|Hizalama İçin Seçilen Noktalar|Hizalanmış İmge|
 |:-------:|:----:|:----:|
-![perspektif d�n�s�m� �rnek][sudoku1] | ![perspektif d�n�s�m� �rnek][sudoku2] | ![perspektif d�n�s�m� �rnek][sudoku3]
+![perspektif dönüşümü örnek][sudoku1] | ![perspektif dönüşümü örnek][sudoku2] | ![perspektif dönüşümü örnek][sudoku3]
 
-Baska bir uygulama olarak da rubik k�p �rnegine bakalim. Burada amacimiz verilen rubik k�pe yukaridan baksaydik nasil bir g�r�nt� elde ederdik sorusuna cevap bulmak.
+Başka bir uygulama olarak da rubik küp örneğine bakalım. Burada amacımız verilen rubik küpe yukarıdan baksaydık nasıl bir görüntü elde ederdik sorusuna cevap bulmak.
 
-|Girdi Imgesi|Hizalama I�in Se�ilen Noktalar|Hizalanmis Imge|
+|Girdi İmgesi|Hizalama İçin Seçilen Noktalar|Hizalanmış İmge|
 |:-------:|:----:|:----:|
-![perspektif d�n�s�m� �rnek][rubik1] | ![perspektif d�n�s�m� �rnek][rubik2] | ![perspektif d�n�s�m� �rnek][rubik3]
+![perspektif dönüşümü örnek][rubik1] | ![perspektif dönüşümü örnek][rubik2] | ![perspektif dönüşümü örnek][rubik3]
 
-G�r�ld�g� gibi algoritma sadece k�se noktalarini alarak otomatik �rettigi parametreler ile gayet basarili sonu�lar �retmektedir. Bu da bize kamera a�isindan bagimsiz g�r�nt� isleme uygulamalarinda b�y�k bir katki saglamaktadir.
+Görüldüğü gibi algoritma sadece köşe noktalarını alarak otomatik ürettiği parametreler ile gayet başarılı sonuçlar üretmektedir. Bu da bize kamera açısından bağımsız görüntü işleme uygulamalarında büyük bir katkı sağlamaktadır.
 
-Yazida yer alan analizlerin yapildigi kod par�alari, g�rseller ve kullanilan veri setlerine [perspective_transform](https://github.com/cescript/imlab_perspective_transform) GitHub sayfasi �zerinden erisilebilirsiniz.
+Yazıda yer alan analizlerin yapıldığı kod parçaları, görseller ve kullanılan veri setlerine [perspective_transform](https://github.com/cescript/imlab_perspective_transform) GitHub sayfası üzerinden erişilebilirsiniz.
 
 **Referanslar**
 
